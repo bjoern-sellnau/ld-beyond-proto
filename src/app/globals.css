@@ -1,0 +1,198 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #fafafa;
+  --foreground: #18181b;
+  --muted: #71717a;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+  --border: rgba(24, 24, 27, 0.1);
+  --accent: #8b5cf6;
+  --accent-2: #d946ef;
+  --glass: rgba(255, 255, 255, 0.65);
+}
+
+.dark {
+  --background: #09090d;
+  --foreground: #f4f4f5;
+  --muted: #a1a1aa;
+  --surface: #131318;
+  --surface-2: #1c1c24;
+  --border: rgba(244, 244, 245, 0.1);
+  --accent: #a78bfa;
+  --accent-2: #e879f9;
+  --glass: rgba(19, 19, 24, 0.6);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ---------- View Transitions ---------- */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Header bleibt während Seitenübergängen stabil */
+.site-header {
+  view-transition-name: site-header;
+}
+
+::view-transition-group(site-header) {
+  z-index: 100;
+}
+
+/* Aktive Pille der Navigation morpht zwischen den Einträgen */
+.nav-pill-active {
+  view-transition-name: nav-pill;
+}
+
+::view-transition-group(nav-pill) {
+  z-index: 101;
+  animation-duration: 0.3s;
+}
+
+/* ---------- Animationen aus (Toggle & prefers-reduced-motion) ---------- */
+
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  animation-duration: 0.001s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001s !important;
+  scroll-behavior: auto !important;
+}
+
+html[data-motion="off"]::view-transition-group(*),
+html[data-motion="off"]::view-transition-old(*),
+html[data-motion="off"]::view-transition-new(*) {
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-motion="on"]) *,
+  html:not([data-motion="on"]) *::before,
+  html:not([data-motion="on"]) *::after {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
+    scroll-behavior: auto !important;
+  }
+
+  html:not([data-motion="on"])::view-transition-group(*),
+  html:not([data-motion="on"])::view-transition-old(*),
+  html:not([data-motion="on"])::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* ---------- Utilities ---------- */
+
+@utility glass {
+  background: var(--glass);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+}
+
+@utility text-gradient {
+  background: linear-gradient(110deg, var(--accent), var(--accent-2), var(--accent));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Eintritts-Animationen beim Laden */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, -6%, 0) scale(1.08);
+  }
+}
+
+@utility animate-float-slow {
+  animation: float-slow 14s ease-in-out infinite;
+}
+
+@keyframes float-slower {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-5%, 5%, 0) scale(1.12);
+  }
+}
+
+@utility animate-float-slower {
+  animation: float-slower 18s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% center;
+  }
+}
+
+@utility animate-shimmer {
+  animation: shimmer 6s linear infinite;
+}
+
+/* Dezentes Punktraster für Hero-Flächen */
+@utility bg-dot-grid {
+  background-image: radial-gradient(circle, var(--color-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Scrollbar dezent */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
