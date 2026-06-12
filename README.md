@@ -34,9 +34,21 @@ teilen sich einen `view-transition-name` und morphen beim Navigieren ineinander.
 ```bash
 npm install
 npm run dev    # http://localhost:3000
-npm run build  # statischer Produktions-Build (SSG für alle Seiten)
+npm run build  # statischer Export nach ./out (output: "export")
 npm run lint
 ```
+
+## Deployment (GitHub Pages)
+
+Der Workflow `.github/workflows/deploy-pages.yml` baut bei jedem Push auf `main`
+einen statischen Export und deployt ihn auf GitHub Pages. Dabei wird
+`GITHUB_PAGES=true` gesetzt, wodurch `basePath`/`assetPrefix` auf
+`/ld-beyond-proto` zeigen (siehe `next.config.ts`).
+
+Einmalig nötig: In den Repo-Einstellungen unter **Settings → Pages** als Source
+**„GitHub Actions“** auswählen. Bei einer Custom Domain (z. B.
+`loona-designs.tech`) entfällt der basePath – dann im Workflow einfach
+`GITHUB_PAGES` weglassen.
 
 ## Struktur
 
