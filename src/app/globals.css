@@ -185,6 +185,29 @@ html[data-motion="off"]::view-transition-new(*) {
   animation: shimmer 6s linear infinite;
 }
 
+@keyframes spin-slow {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@utility animate-spin-slow {
+  animation: spin-slow 40s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
 /* Dezentes Punktraster für Hero-Flächen */
 @utility bg-dot-grid {
   background-image: radial-gradient(circle, var(--color-line) 1px, transparent 1px);
