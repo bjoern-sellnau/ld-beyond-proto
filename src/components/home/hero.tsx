@@ -3,10 +3,12 @@
 import { useSearchParams } from "next/navigation";
 import { HeroDefault } from "./hero-default";
 import { HeroVariant2 } from "./hero-variant-2";
+import { HeroVariant3 } from "./hero-variant-3";
 
 /**
  * Wählt die Hero-Variante anhand des Query-Parameters ?e.
- * ?e=2 → alternativer Hero, sonst der Standard-Hero.
+ * ?e=2 → alternativer Hero, ?e=3 → kreativer Kinetic-Hero,
+ * sonst der Standard-Hero.
  *
  * Der Parameter wird clientseitig ausgewertet, damit die Seite
  * weiterhin statisch exportiert werden kann (GitHub Pages).
@@ -16,5 +18,6 @@ export function Hero() {
   const experiment = useSearchParams().get("e");
 
   if (experiment === "2") return <HeroVariant2 />;
+  if (experiment === "3") return <HeroVariant3 />;
   return <HeroDefault />;
 }

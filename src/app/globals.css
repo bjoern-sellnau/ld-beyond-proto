@@ -208,6 +208,99 @@ html[data-motion="off"]::view-transition-new(*) {
   animation: marquee 28s linear infinite;
 }
 
+/* ---------- Variante 3: Aurora / Kinetic ---------- */
+
+@keyframes aurora {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate3d(8%, -6%, 0) rotate(120deg) scale(1.2);
+  }
+  66% {
+    transform: translate3d(-6%, 7%, 0) rotate(240deg) scale(0.9);
+  }
+}
+
+@utility animate-aurora {
+  animation: aurora 24s ease-in-out infinite;
+}
+
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@utility animate-orbit {
+  animation: orbit 26s linear infinite;
+}
+
+@utility animate-orbit-rev {
+  animation: orbit 34s linear infinite reverse;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+@utility animate-twinkle {
+  animation: twinkle 4.5s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+
+@utility animate-drift {
+  animation: drift 8s ease-in-out infinite;
+}
+
+@keyframes letter-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em) rotate(6deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@utility animate-letter {
+  animation: letter-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@utility animate-pulse-ring {
+  animation: pulse-ring 3.5s ease-out infinite;
+}
+
 /* Dezentes Punktraster für Hero-Flächen */
 @utility bg-dot-grid {
   background-image: radial-gradient(circle, var(--color-line) 1px, transparent 1px);
