@@ -7,6 +7,7 @@ import { HeroVariant3 } from "./hero-variant-3";
 import { HeroVariant4 } from "./hero-variant-4";
 import { HeroVariant5 } from "./hero-variant-5";
 import { HeroVariant6 } from "./hero-variant-6";
+import { HeroVariant7 } from "./hero-variant-7";
 
 /**
  * Wählt die Hero-Variante anhand des Query-Parameters ?e.
@@ -14,6 +15,7 @@ import { HeroVariant6 } from "./hero-variant-6";
  * ?e=4 → abstrakte Matrix-Canvas-Animation,
  * ?e=5 → interaktive 3D-Netzwerk-Sphäre,
  * ?e=6 → Matrix in echtem 3D (Kamera schwenkt mit der Maus),
+ * ?e=7 → wie 6, zusätzlich folgt der Text dem Mauszeiger,
  * sonst der Standard-Hero.
  *
  * Der Parameter wird clientseitig ausgewertet, damit die Seite
@@ -28,5 +30,6 @@ export function Hero() {
   if (experiment === "4") return <HeroVariant4 />;
   if (experiment === "5") return <HeroVariant5 />;
   if (experiment === "6") return <HeroVariant6 />;
+  if (experiment === "7") return <HeroVariant7 />;
   return <HeroDefault />;
 }
